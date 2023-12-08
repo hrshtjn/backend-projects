@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
@@ -13,6 +14,9 @@ public class MyAsyncService {
 
 
     private final Executor taskExecutor;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     public MyAsyncService(Executor taskExecutor) {
         this.taskExecutor = taskExecutor;
@@ -32,19 +36,26 @@ public class MyAsyncService {
     public CompletableFuture<String> fetchDataAsync(String source) {
 
         CompletableFuture<String> future = new CompletableFuture<>();
-        CompletableFuture.runAsync(() -> {
-            fetchDataFromSource(source);
-            future.complete(null);
-        }, taskExecutor);
-        return future;
 
-//        return CompletableFuture.supplyAsync(
-//                () -> {fetchDataFromSource(source);},taskExecutor);
+        String response = fetchDataFromSource(source);
+        return CompletableFuture.completedFuture(response);
+
     }
 
     // Combine results when both CompletableFuture tasks are completed
     public String combineResults(String result1, String result2) {
         return "Combined Result: " + result1 + " | " + result2;
     }
+
+
+    @Async
+    public CompletableFuture<String> callMsgService() {
+        final String msgServiceUrl = "http://localhost:9000/msg";
+
+        final String response = restTemplate.getForObject(msgServiceUrl, String.class);
+
+        return CompletableFuture.completedFuture(response);
+    }
+
 
 }
