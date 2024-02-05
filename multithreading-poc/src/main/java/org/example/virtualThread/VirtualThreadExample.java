@@ -14,6 +14,7 @@ public class VirtualThreadExample {
 
         Thread vThread = Thread.ofVirtual().start(runnable);
         vThread.setName("vThread");
+        vThread.join();
         Thread vThreadUnstarted =Thread.ofVirtual().unstarted(runnable);
         vThreadUnstarted.setName("vThreadUnstarted");
 

@@ -34,7 +34,7 @@ public class FolderProcessor extends RecursiveTask<List<String>> {
         //Get the content of the folder.
         File file = new File(path);
 
-        File content[] = file.listFiles();
+        File[] content = file.listFiles();
         //For each element in the folder, if there is a subfolder, create a new FolderProcessor object
         //and execute it asynchronously using the fork() method.
         if (content != null) {

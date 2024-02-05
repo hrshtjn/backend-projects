@@ -8,7 +8,7 @@ public class ExecutorRunnableExample {
     public static void main(String[] args) {
         Runnable runnableTask = () -> {
             try {
-                TimeUnit.MILLISECONDS.sleep(1000);
+                TimeUnit.MILLISECONDS.sleep(5000);
                 System.out.println(Thread.currentThread().getName()+" Current time :: " + LocalDateTime.now());
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -29,7 +29,7 @@ public class ExecutorRunnableExample {
             try
             {
                 System.out.println("The method return value : " + result.get());
-                break;
+                //break;
             }
             catch (InterruptedException | ExecutionException e)
             {
@@ -38,7 +38,8 @@ public class ExecutorRunnableExample {
 
             //Sleep for 1 second
             try {
-                Thread.sleep(1000L);
+                Thread.sleep(5000L);
+                System.out.println(Thread.currentThread().getName()+" Current time :: " + LocalDateTime.now());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

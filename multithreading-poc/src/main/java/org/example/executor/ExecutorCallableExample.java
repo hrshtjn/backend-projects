@@ -40,6 +40,10 @@ public class ExecutorCallableExample {
             try
             {
                 System.out.println("The method return value : " + result.get());
+                //once you call future.get(), it will block until the result of the computation
+                // represented by the Future is available.
+                // After future.get() returns (either with a result, an exception, or because it was canceled),
+                // future.isDone() will always return true.
                 break;
             }
             catch (InterruptedException | ExecutionException e)

@@ -1,5 +1,7 @@
 package org.example.atomic;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class AtomicCounterExample {
@@ -17,6 +19,8 @@ public class AtomicCounterExample {
     }
 
     public static void main(String[] args) throws InterruptedException {
+        Instant start = Instant.now();
+
         final Counter counter = new Counter();
 
         //1000 threads
@@ -30,5 +34,8 @@ public class AtomicCounterExample {
         }
         Thread.sleep(1000);
         System.out.println("Final number (should be 1000): " + counter.value());
+        Instant end = Instant.now();
+        long time = Duration.between(start, end).toMillis();
+        System.out.println("\n"+time+" ms");
     }
 }
