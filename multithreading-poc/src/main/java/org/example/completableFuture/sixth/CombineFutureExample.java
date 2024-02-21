@@ -11,7 +11,7 @@ public class CombineFutureExample {
 //                .thenAccept(System.out::println).join();
 
         getValueAsync(val)
-                .thenCompose(value -> getValue2Async(value))
+                .thenCompose(CombineFutureExample::getValue2Async)
                 .thenAccept(System.out::println).join();
     }
 

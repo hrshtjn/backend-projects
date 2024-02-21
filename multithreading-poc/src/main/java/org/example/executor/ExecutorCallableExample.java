@@ -35,7 +35,7 @@ public class ExecutorCallableExample {
         //2. execute individual tasks using submit() method
         Future<String> result = executor.submit(callableTask);
 
-        while(result.isDone() == false)
+        while(!result.isDone())
         {
             try
             {

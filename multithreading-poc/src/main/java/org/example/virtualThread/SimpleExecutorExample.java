@@ -20,8 +20,8 @@ public class SimpleExecutorExample {
 
         Instant start = Instant.now();
 
-        try (var executor = Executors.newFixedThreadPool(100)) {
-            for(int i = 0; i < 1000; i++) {
+        try (var executor = Executors.newFixedThreadPool(100000)) {
+            for(int i = 0; i < 100000; i++) {
                 executor.submit(runnable);
             }
         }
