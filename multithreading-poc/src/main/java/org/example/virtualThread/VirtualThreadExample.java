@@ -19,7 +19,6 @@ public class VirtualThreadExample {
         vThreadUnstarted.setName("vThreadUnstarted");
 
         vThreadUnstarted.start();
-        vThread.join();
         vThreadUnstarted.join();
 
 
