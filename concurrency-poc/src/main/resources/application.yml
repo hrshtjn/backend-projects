@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: concurrency-poc
+
+opentracing:
+  jaeger:
+    udp-sender:
+      host: localhost
+      port: 4318
+    log-spans: true

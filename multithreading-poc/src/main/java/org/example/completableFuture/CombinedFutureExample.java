@@ -10,7 +10,7 @@ public class CompletableFutureExecutorExample {
     public static void main(String[] args) {
         Instant start = Instant.now();
         // Create a fixed-size thread pool with 4 threads
-        ExecutorService executor = Executors.newFixedThreadPool(4);
+        ExecutorService executor = Executors.newFixedThreadPool(3);
 
         // Create CompletableFuture tasks and submit them to the thread pool
         CompletableFuture<Integer> future1 = CompletableFuture.supplyAsync(() -> compute(1), executor);
@@ -39,6 +39,7 @@ public class CompletableFutureExecutorExample {
     public static int compute(int value) {
         // Simulate a long-running computation
         try {
+            System.out.println(Thread.currentThread().getName()+" is running...");
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
