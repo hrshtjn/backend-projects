@@ -1,0 +1,8 @@
+- create multi module project in gradle
+- write integration and unit tests in product svc, order svc
+- learn rest assured
+- internal working of docker (docker architecture - eg., what are layers, why docker compose up runs quickly the second time)
+- play around with flyway
+- what happens internally when we add annotations eg. @EnableFeignClients? does it initialize some beans?
+- learn wiremock
+- getting cors error when hitting swagger endpoints from gateway
