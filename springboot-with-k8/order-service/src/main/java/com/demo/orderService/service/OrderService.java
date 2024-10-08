@@ -3,6 +3,7 @@ package com.demo.orderService.service;
 import com.demo.orderService.client.InventoryClient;
 import com.demo.orderService.dto.OrderRequest;
 import com.demo.orderService.entity.Order;
+
 import com.demo.orderService.event.OrderPlacedEvent;
 import com.demo.orderService.repository.OrderRepository;
 
@@ -20,7 +21,7 @@ import java.util.UUID;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final InventoryClient inventoryClient;
-    private final KafkaTemplate<String,OrderPlacedEvent> kafkaTemplate;
+    private final KafkaTemplate<String, OrderPlacedEvent> kafkaTemplate;
 
     public void placeOrder(OrderRequest orderRequest) {
         boolean isInStock = inventoryClient.isInStock(orderRequest.skuCode(), orderRequest.quantity());
@@ -34,7 +35,9 @@ public class OrderService {
             orderRepository.save(order);
             log.info("Order {} is saved", order.getId());
 
-            OrderPlacedEvent orderPlacedEvent = new OrderPlacedEvent(order.getOrderNumber().toString(),orderRequest.userDetails().email());
+            OrderPlacedEvent orderPlacedEvent = new OrderPlacedEvent();
+            orderPlacedEvent.setOrderNumber(order.getOrderNumber());
+            orderPlacedEvent.setEmail(orderRequest.userDetails().email());
             log.info("Start - Sending order details to Kafka topic order-placed");
             kafkaTemplate.send("order-placed",orderPlacedEvent);
             log.info("End - Sending order details to Kafka topic order-placed");
