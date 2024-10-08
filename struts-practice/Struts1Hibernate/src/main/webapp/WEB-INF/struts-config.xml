@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<form-beans>
+		<form-bean name="UserForm" type="com.demo.struts.form.UserForm" />
+	</form-beans>
+
+	<action-mappings>
+		<action path="/addUser" type="com.demo.struts.action.AddUserAction"
+			 name="UserForm" parameter="method"
+			scope="request" validate="false">
+			<forward name="success" path="/adduser.jsp" />
+			<forward name="add" path="/confirmation.jsp" />
+			<forward name="back" path="/index.jsp" />
+		</action>
+		
+		<action path="/listUser" type="com.demo.struts.action.ListUserAction"
+			 name="UserForm"
+			scope="request" validate="false">
+			<forward name="success" path="/listuser.jsp" />
+			<forward name="back" path="/index.jsp" />
+		</action>
+		
+		<action path="/changeLocale" type="com.demo.struts.action.ChangeLocaleAction"
+			scope="request" validate="false">
+			<forward name="success" path="/index.jsp" />
+			
+		</action>
+		
+	</action-mappings>
+	
+	<message-resources parameter="ApplicationResource" />
+
+</struts-config>
