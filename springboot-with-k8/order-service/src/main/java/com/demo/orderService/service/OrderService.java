@@ -42,6 +42,7 @@ public class OrderService {
             kafkaTemplate.send("order-placed",orderPlacedEvent);
             log.info("End - Sending order details to Kafka topic order-placed");
         } else {
+            log.error("Product is not in stock, please try again later");
             throw new IllegalArgumentException("Product is not in stock, please try again later");
         }
 
